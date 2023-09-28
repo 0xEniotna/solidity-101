@@ -19,31 +19,21 @@ https://solidity.readthedocs.io/en/develop/types.html?highlight=mapping
 
 */
 contract ex05 is exerciceTemplate {
+    mapping(address => address) public helpersRegister;
 
-	mapping(address => address) public helpersRegister;
+    constructor(ERC20TD _TDERC20) exerciceTemplate(_TDERC20) {}
 
-  constructor(ERC20TD _TDERC20) 
-  exerciceTemplate(_TDERC20)
-  {
-  }
-  
-  function declareHelper(address _helperAddress) 
-  public  
-  {
-    require(_helperAddress != msg.sender);
-  	helpersRegister[msg.sender] = _helperAddress;
-  }
-  
-  function helpColleague(address _helpedColleague) 
-  public  
-  {
-    require(hasCompletedExercice[_helpedColleague] != true);
-    require(helpersRegister[_helpedColleague] == msg.sender);
+    function declareHelper(address _helperAddress) public {
+        require(_helperAddress != msg.sender);
+        helpersRegister[msg.sender] = _helperAddress;
+    }
 
-  	// Validating exercice
-    creditStudent(2, _helpedColleague);
-    validateExercice(_helpedColleague);
+    function helpColleague(address _helpedColleague) public {
+        require(hasCompletedExercice[_helpedColleague] != true);
+        require(helpersRegister[_helpedColleague] == msg.sender);
 
-  }
-
+        // Validating exercice
+        creditStudent(2, _helpedColleague);
+        validateExercice(_helpedColleague);
+    }
 }

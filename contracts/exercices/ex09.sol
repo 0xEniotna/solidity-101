@@ -10,7 +10,7 @@ In this exercice, you need to:
 - Find the last visible version of the contract code
 - Use a function 
 - Your points are credited by the contract
-*/ 
+*/
 
 /*
 What you need to know to complete this exercice
@@ -20,13 +20,7 @@ C) Only using the ABI of this contract puts you at risk of not getting the point
 
 */
 
-
-contract ex09 is exerciceTemplate { 
-
-// Find the code elsewhere
-  constructor(ERC20TD _TDERC20) 
-  exerciceTemplate(_TDERC20)
-  {
-  }
-
+contract ex09 is exerciceTemplate {
+    // Find the code elsewhere
+    constructor(ERC20TD _TDERC20) exerciceTemplate(_TDERC20) {}
 }

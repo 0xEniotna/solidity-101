@@ -22,55 +22,41 @@ C) Etherscan.io https://etherscan.io/ lets you visualize events that were fired 
 
 */
 contract ex07 is exerciceTemplate {
+    mapping(address => uint) private privateValues;
+    mapping(address => bool) public exerciceWasStarted;
+    uint[20] private randomValuesStore;
+    uint public nextValueStoreRank;
 
-	mapping(address => uint) private privateValues;
-  mapping(address => bool) public exerciceWasStarted;
-  uint[20] private randomValuesStore;
-  uint public nextValueStoreRank;
+    event showPrivateVariableInEvent(uint myVariable);
 
-  event showPrivateVariableInEvent(uint myVariable);
-  
-  constructor(ERC20TD _TDERC20) 
-  exerciceTemplate(_TDERC20)
-  {
-  }
+    constructor(ERC20TD _TDERC20) exerciceTemplate(_TDERC20) {}
 
-  function setRandomValueStore(uint[20] memory _randomValuesStore) 
-  public 
-  onlyTeachers
-  {
-   randomValuesStore = _randomValuesStore;
-   nextValueStoreRank = 0;
-  }
-
-  function assignRank() 
-  public  
-  {
-    privateValues[msg.sender] = randomValuesStore[nextValueStoreRank];
-    nextValueStoreRank += 1;
-    if (nextValueStoreRank >= randomValuesStore.length)
-    {
-     nextValueStoreRank = 0; 
+    function setRandomValueStore(
+        uint[20] memory _randomValuesStore
+    ) public onlyTeachers {
+        randomValuesStore = _randomValuesStore;
+        nextValueStoreRank = 0;
     }
-    exerciceWasStarted[msg.sender] = true;
-  }
-  
-  function fireEvent() 
-  public  
-  {
-    emit showPrivateVariableInEvent(privateValues[msg.sender]+32);
-  }
 
-  function showYouKnowPrivateValue(uint _privateValue) 
-  public  
-  {
-    require(privateValues[msg.sender] == _privateValue);
-    require(exerciceWasStarted[msg.sender] == true);
-    
-    // Validating exercice
-    creditStudent(2, msg.sender);
-    validateExercice(msg.sender);
+    function assignRank() public {
+        privateValues[msg.sender] = randomValuesStore[nextValueStoreRank];
+        nextValueStoreRank += 1;
+        if (nextValueStoreRank >= randomValuesStore.length) {
+            nextValueStoreRank = 0;
+        }
+        exerciceWasStarted[msg.sender] = true;
+    }
 
-  }
+    function fireEvent() public {
+        emit showPrivateVariableInEvent(privateValues[msg.sender] + 32);
+    }
 
+    function showYouKnowPrivateValue(uint _privateValue) public {
+        require(privateValues[msg.sender] == _privateValue);
+        require(exerciceWasStarted[msg.sender] == true);
+
+        // Validating exercice
+        creditStudent(2, msg.sender);
+        validateExercice(msg.sender);
+    }
 }

@@ -20,23 +20,13 @@ B) Documentation of the Kelsen framework on https://github.com/97network/Kelsen/
 
 */
 contract ex11b is exerciceTemplate {
+    uint public secretValue;
 
-  uint public secretValue;
+    constructor(ERC20TD _TDERC20) exerciceTemplate(_TDERC20) {
+        secretValue = 31020;
+    }
 
-  constructor(ERC20TD _TDERC20) 
-  exerciceTemplate(_TDERC20)
-  {
-    secretValue = 31020;
-  }
-  
-  function setSecretValue(uint _newSecretValue)
-  public
-  onlyTeachers
-  {
-  	secretValue = _newSecretValue;
-  }
-
-
-
-
+    function setSecretValue(uint _newSecretValue) public onlyTeachers {
+        secretValue = _newSecretValue;
+    }
 }

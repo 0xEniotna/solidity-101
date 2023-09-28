@@ -9,9 +9,6 @@ In this exercice you should:
 - Call the appropriate function on ex14 to show you did
 */
 
-
 interface Iex14Solution {
-
- function completeWorkshop() external;
-
+    function completeWorkshop() external;
 }

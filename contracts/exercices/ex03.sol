@@ -10,29 +10,20 @@ In this exercice, you need to:
 - Understand the require() keyword and send the correct value to pass the requirement
 - Your points are credited by the contract
 */
- 
+
 /*
 What you need to know to complete this exercice
 A) What was included in the previous exercices
 B) Understanding requires https://docs.soliditylang.org/en/v0.6.0/control-structures.html#id4
 */
 contract ex03 is exerciceTemplate {
+    constructor(ERC20TD _TDERC20) exerciceTemplate(_TDERC20) {}
 
-  constructor(ERC20TD _TDERC20) 
-  exerciceTemplate(_TDERC20)
-  {
-  }
-  
-  function claimPoints(uint _studentUint) 
-  public 
-  {
+    function claimPoints(uint _studentUint) public {
+        require(_studentUint == 180618, "Value is incorrect");
 
-  	require(_studentUint == 180618, "Value is incorrect");
-
-  	// Validating exercice
-    creditStudent(2, msg.sender);
-    validateExercice(msg.sender);
-
-  }
-
+        // Validating exercice
+        creditStudent(2, msg.sender);
+        validateExercice(msg.sender);
+    }
 }

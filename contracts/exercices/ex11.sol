@@ -3,6 +3,7 @@ pragma solidity ^0.8.9;
 
 import "../exerciceTemplate.sol";
 import "./ex11b.sol";
+
 /*
 Exercice 11: Understanding how contracts communicate with each other.
 This contract (11) reads a value from another contract (11b).
@@ -20,37 +21,33 @@ B) https://medium.com/@blockchain101/calling-the-function-of-another-contract-in
 
 */
 contract ex11 is exerciceTemplate {
+    address public ex11bAddress;
 
-  address public ex11bAddress;
+    constructor(
+        ERC20TD _TDERC20,
+        address _ex11bAddress
+    ) exerciceTemplate(_TDERC20) {
+        ex11bAddress = _ex11bAddress;
+    }
 
-  constructor(ERC20TD _TDERC20, address _ex11bAddress) 
-  exerciceTemplate(_TDERC20)
-  {
-    ex11bAddress = _ex11bAddress;
-  }
+    function askForPoints(
+        uint _aValueToInput,
+        uint _nextValueForSecret
+    ) public {
+        // Instanciating the external contract
+        ex11b ex11bInstance = ex11b(ex11bAddress);
 
+        // Retrieving value from external contract
+        uint retrievedSecretValue = ex11bInstance.secretValue();
 
+        // Checking that our input value is the one stored in contract ex11b
+        require(_aValueToInput == retrievedSecretValue);
 
-  function askForPoints(uint _aValueToInput, uint _nextValueForSecret) 
-  public 
-  {
-    // Instanciating the external contract
-    ex11b ex11bInstance = ex11b(ex11bAddress);
+        // Updating secret value with the new value you chose
+        ex11bInstance.setSecretValue(_nextValueForSecret);
 
-    // Retrieving value from external contract
-    uint retrievedSecretValue = ex11bInstance.secretValue();
-
-    // Checking that our input value is the one stored in contract ex11b
-    require(_aValueToInput == retrievedSecretValue);
-
-    // Updating secret value with the new value you chose
-    ex11bInstance.setSecretValue(_nextValueForSecret);
-
-    // Validating exercice
-    creditStudent(2, msg.sender);
-    validateExercice(msg.sender);
-
-  }
-
-
+        // Validating exercice
+        creditStudent(2, msg.sender);
+        validateExercice(msg.sender);
+    }
 }

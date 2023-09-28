@@ -17,18 +17,11 @@ A) Create a wallet using Metamask (http://metamask.io)
 
 */
 contract ex01 is exerciceTemplate {
+    constructor(ERC20TD _TDERC20) exerciceTemplate(_TDERC20) {}
 
-	constructor(ERC20TD _TDERC20) 
-  exerciceTemplate(_TDERC20)
-  {
-  }
-  
-  function ping() 
-  public  
-  {
-    // Validating exercice
-    creditStudent(2, msg.sender);
-    validateExercice(msg.sender);
-  }
-
+    function ping() public {
+        // Validating exercice
+        creditStudent(2, msg.sender);
+        validateExercice(msg.sender);
+    }
 }

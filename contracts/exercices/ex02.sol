@@ -23,33 +23,21 @@ D) The 'msg' object holds information regarding the account sending the transact
 https://solidity.readthedocs.io/en/develop/miscellaneous.html#index-4
 */
 contract ex02 is exerciceTemplate {
+    constructor(ERC20TD _TDERC20) exerciceTemplate(_TDERC20) {}
 
-	constructor(ERC20TD _TDERC20) 
-  exerciceTemplate(_TDERC20)
-  {
-  }
-  
-  fallback () 
-  external 
-  payable  
-  {
+    fallback() external payable {
+        require(msg.value != 0);
 
-  	require(msg.value != 0);
+        // Validating exercice
+        creditStudent(2, msg.sender);
+        validateExercice(msg.sender);
+    }
 
-  	// Validating exercice
-    creditStudent(2, msg.sender);
-    validateExercice(msg.sender);
+    receive() external payable {
+        require(msg.value != 0);
 
-  }
-
-  receive () external payable 
-  {
-    require(msg.value != 0);
-
-    // Validating exercice
-    creditStudent(2, msg.sender);
-    validateExercice(msg.sender);
-  }
-
-
+        // Validating exercice
+        creditStudent(2, msg.sender);
+        validateExercice(msg.sender);
+    }
 }

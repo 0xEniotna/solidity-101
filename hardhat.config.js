@@ -8,15 +8,11 @@ module.exports = {
     },
     goerli: {
       url: "https://goerli.infura.io/v3/" + process.env.infura,
-      accounts: {
-        mnemonic: process.env.mnemonic
-      }
+      accounts: [process.env.privateKey]
     },
     sepolia: {
       url: "https://sepolia.infura.io/v3/" + process.env.infura,
-      accounts: {
-        mnemonic: process.env.mnemonic
-      }
+      accounts: [process.env.privateKey]
     }
   },
   solidity: "0.8.18",

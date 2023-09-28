@@ -21,56 +21,41 @@ D) When the contract is created, the teacher creates an array called randomValue
 When students start the exercice, they get assigned one of these values.
 */
 contract ex06 is exerciceTemplate {
+    mapping(address => uint) private privateValues;
+    mapping(address => uint) public publicValues;
+    mapping(address => bool) public exerciceWasStarted;
 
-	mapping(address => uint) private privateValues;
-  mapping(address => uint) public publicValues;
-  mapping(address => bool) public exerciceWasStarted;
+    uint[20] private randomValuesStore;
+    uint public nextValueStoreRank;
 
-  uint[20] private randomValuesStore;
-  uint public nextValueStoreRank;
+    constructor(ERC20TD _TDERC20) exerciceTemplate(_TDERC20) {}
 
-  constructor(ERC20TD _TDERC20) 
-  exerciceTemplate(_TDERC20)
-  {
-  }
-  
-  function setRandomValueStore(uint[20] memory _randomValuesStore) 
-  public 
-  onlyTeachers
-  {
-   randomValuesStore = _randomValuesStore;
-   nextValueStoreRank = 0;
-  }
-
-  function startExercice() 
-  public  
-  {
-    privateValues[msg.sender] = randomValuesStore[nextValueStoreRank];
-    nextValueStoreRank += 1;
-    if (nextValueStoreRank >= randomValuesStore.length)
-    {
-     nextValueStoreRank = 0; 
+    function setRandomValueStore(
+        uint[20] memory _randomValuesStore
+    ) public onlyTeachers {
+        randomValuesStore = _randomValuesStore;
+        nextValueStoreRank = 0;
     }
-    exerciceWasStarted[msg.sender] = true;
-  }
-  
-  function duplicatePrivateValueInPublic() 
-  public  
-  {
-    publicValues[msg.sender] = privateValues[msg.sender] + 85;
-  }
 
-  function showYouKnowPrivateValue(uint _privateValue) 
-  public 
-   
-  {
-    require(privateValues[msg.sender] == _privateValue);
-    require(exerciceWasStarted[msg.sender] == true);
-    
-    // Validating exercice
-    creditStudent(2, msg.sender);
-    validateExercice(msg.sender);
+    function startExercice() public {
+        privateValues[msg.sender] = randomValuesStore[nextValueStoreRank];
+        nextValueStoreRank += 1;
+        if (nextValueStoreRank >= randomValuesStore.length) {
+            nextValueStoreRank = 0;
+        }
+        exerciceWasStarted[msg.sender] = true;
+    }
 
-  }
+    function duplicatePrivateValueInPublic() public {
+        publicValues[msg.sender] = privateValues[msg.sender] + 85;
+    }
 
+    function showYouKnowPrivateValue(uint _privateValue) public {
+        require(privateValues[msg.sender] == _privateValue);
+        require(exerciceWasStarted[msg.sender] == true);
+
+        // Validating exercice
+        creditStudent(2, msg.sender);
+        validateExercice(msg.sender);
+    }
 }

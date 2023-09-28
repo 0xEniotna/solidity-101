@@ -16,26 +16,18 @@ In this exercice, you need to:
 
 */
 contract ex12 is exerciceTemplate {
+    uint public aValueToInput;
 
-  uint public aValueToInput;
+    constructor(ERC20TD _TDERC20) exerciceTemplate(_TDERC20) {
+        aValueToInput == 0;
+    }
 
-  constructor(ERC20TD _TDERC20) 
-  exerciceTemplate(_TDERC20)
-  {
-    aValueToInput == 0;
-  }
+    function askForPoints(uint _valueToInput, uint _newValue) public {
+        require(_valueToInput == aValueToInput);
+        aValueToInput = _newValue;
 
-  function askForPoints(uint _valueToInput, uint _newValue) 
-  public  
-  {
-    require(_valueToInput == aValueToInput);
-    aValueToInput = _newValue;
-
-    // Validating exercice
-    creditStudent(2, msg.sender);
-    validateExercice(msg.sender);
-
-  }
-
-
+        // Validating exercice
+        creditStudent(2, msg.sender);
+        validateExercice(msg.sender);
+    }
 }

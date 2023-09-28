@@ -20,43 +20,28 @@ C)  x += y is used to add y to x. Similarly, x -= y is used to deduct y from x
 D) Attributing a non 0 value to a uint in a smart contract will result in unpredictable behavior. As such, it is essential to make sure this never happens
 */
 contract ex04 is exerciceTemplate {
+    mapping(address => uint) public studentsCounter;
 
-	mapping(address => uint) public studentsCounter;
+    constructor(ERC20TD _TDERC20) exerciceTemplate(_TDERC20) {}
 
-  constructor(ERC20TD _TDERC20) 
-  exerciceTemplate(_TDERC20)
-  {
-  }
-  
-  function resetCounter() 
-  public 
-  {
-  	studentsCounter[msg.sender] = 0;
-  }
-  
-  function incrementCounter() 
-  public  
-  {
-  	studentsCounter[msg.sender] += 2;
-  }
- 
-  function decrementCounter() 
-  public  
-  {
-  	require(studentsCounter[msg.sender] > 1);
-  	studentsCounter[msg.sender] -= 1;
-  }
+    function resetCounter() public {
+        studentsCounter[msg.sender] = 0;
+    }
 
-  function validateCounter() 
-  public  
-  {
+    function incrementCounter() public {
+        studentsCounter[msg.sender] += 2;
+    }
 
-  	require(studentsCounter[msg.sender] == 5, "Counter is not at 5");
+    function decrementCounter() public {
+        require(studentsCounter[msg.sender] > 1);
+        studentsCounter[msg.sender] -= 1;
+    }
 
-  	// Validating exercice
-    creditStudent(2, msg.sender);
-    validateExercice(msg.sender);
+    function validateCounter() public {
+        require(studentsCounter[msg.sender] == 5, "Counter is not at 5");
 
-  }
-
+        // Validating exercice
+        creditStudent(2, msg.sender);
+        validateExercice(msg.sender);
+    }
 }
