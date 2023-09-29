@@ -39,7 +39,7 @@ Your objective is to gather as many TD-SOL-101 points as possible. Please note :
 | Variable visibility                        | [Ex06](contracts/exercices/ex06.sol)          | [Link](https://sepolia.etherscan.io/address/0xb420246f7aFc4DBBDeF2aD4F13F9e281232B08c8) |
 | Events                                     | [Ex07](contracts/exercices/ex07.sol)          | [Link](https://sepolia.etherscan.io/address/0x0011E72F249011311fd80Be3000515B815c71755) |
 | Structures                                 | [Ex08](contracts/exercices/ex08.sol)          | [Link](https://sepolia.etherscan.io/address/0x6578782864eb582Fa7E284d9817915cCA4a5Bf02) |
-| Code history                               | [Ex09](contracts/exercices/ex09.sol)          | [Link](https://sepolia.etherscan.io/address/0x9a38e979482DF32c146CF8ED3582110ee56a5412) |
+| Code history                               | [Ex09](contracts/exercices/ex09.sol)          | [Link](https://sepolia.etherscan.io/address/0xe242F6A0069941dA40FAEB34E2Fa1eaf3Ca7AFA3) |
 | Past transactions                          | [Ex10](contracts/exercices/ex10.sol)          | [Link](https://sepolia.etherscan.io/address/0x18f890776360d0136978D2a34f6846b634199E8C) |
 | Composability                              | [Ex11](contracts/exercices/ex11.sol)          | [Link](https://sepolia.etherscan.io/address/0x02d2c498d063cB029f18F84EeA1Bb0d547585f39) |
 | Blockchain forensics                       | [Ex12](contracts/exercices/ex12.sol)          | Undisclosed                                                                             |
